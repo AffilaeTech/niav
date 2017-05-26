@@ -12,10 +12,15 @@ Class
 Requests wrapper.
 
 Add some helpers:
+
 - default headers
+
 - auto json loads
+
 - open files
+
 - cookies to dict
+
 
     |  **get**(url, query_params=None, headers=None):
     |    Make an HTTP request using 'GET' method

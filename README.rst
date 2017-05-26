@@ -9,16 +9,25 @@ Niav
 ``Niav`` is a lightweight framework that allows you to quickly write functional tests for your API.
 
 It's based on ``Pytest`` and add generic helpers like:
+
 - testcase (python unittest asserts + custom asserts)
+
 - env (environment manager)
+
 - http (get, post, ...)
+
 - ssh (run a command and get result, send/get a file)
+
 - file (create tmp file, sha1sum, delete, ...)
+
 - ssh_tunnel (local port forwarding)
+
 - utils (json, random, pretty print, ...)
 
 And dedicated helpers:
+
 - mongo (MongoDB connector with transparent ssh tunnel)
+
 - more soon...
 
 Niav imposes nothing. If you don't like a helper, for example *http*, you can import directly *requests* or *urllib3* directly in your tests. You can also create your own helpers.
@@ -28,6 +37,7 @@ Niav imposes nothing. If you don't like a helper, for example *http*, you can im
 An example of an API test (`nose <http://docs.pytest.org/en/latest/nose.html>`_ format):
 
 .. code-block:: python
+
     # content of ~/tests/test_example.py
 
     from niav.testcase import TestCase
@@ -105,6 +115,7 @@ env.ini & local.ini
 For the above example to work, you must create a configuration file: env.ini
 
 .. code-block:: python
+
     # content of ~/tests/env.ini
 
     [log]
@@ -140,6 +151,7 @@ Niav read *env.ini* first, and overwrite or add configurations with *local.ini* 
 The other way to set environment is with NIAV_ENV:
 
 .. code-block:: bash
+
     NIAV_ENV=/home/${USER}/tests/env.ini /home/${USER}/venv/niav/bin/pytest tests/test_example.py (from virtualenv)
 
     # with local.ini
@@ -154,6 +166,7 @@ pytest.ini
 You can configure pytest with the file `pytest.ini <https://docs.pytest.org/en/latest/customize.html#builtin-configuration-file-options>`_.
 
 .. code-block:: python
+
     # content of ~/tests/pytest.ini
 
     [pytest]
@@ -167,6 +180,7 @@ Running tests
 -------------
 
 .. code-block:: bash
+
     # running a test (with env.ini/local.ini auto discovery)
     export PYTHONPATH=$PYTHONPATH:/home/${USER}/code/niav/; /home/${USER}/venv/niav/bin/pytest tests/functional_tests/test_example.py
 
@@ -176,6 +190,7 @@ Running tests
 To avoid having to give the PYTHONPATH of Niav, add it to your bash *.profile* or whatever, depending on your favorite shell.
 
 .. code-block:: bash
+
     # running a test (with env.ini/local.ini auto discovery)
     /home/${USER}/venv/niav/bin/pytest tests/functional_tests/test_example.py
 
@@ -193,7 +208,7 @@ Copy / paste the *tests* folder from ``niav`` to your project.
 
 Suggestion for use:
 
-..
+.. code-block::
 
     niav/
     ├── docs/
@@ -256,19 +271,19 @@ Documentation
 Installation
 ~~~~~~~~~~~~
 
-Please read `INSTALL <https://github.com/AffilaeTech/niav/INSTALL.rst>`_.
+Please read `INSTALL <https://github.com/AffilaeTech/niav/blob/master/INSTALL.rst>`_.
 
 
 Reference
 ~~~~~~~~~
 
-Consult the `documentation <https://github.com/AffilaeTech/niav/docs/index.rst>`_ for API reference.
+Consult the `documentation <https://github.com/AffilaeTech/niav/blob/master/docs/index.rst>`_ for API reference.
 
 
 Changelog
 ~~~~~~~~~
 
-See `CHANGELOG <https://github.com/AffilaeTech/niav/CHANGELOG.rst>`_ for fixes and enhancements of each version.
+See `CHANGELOG <https://github.com/AffilaeTech/niav/blob/master/CHANGELOG.rst>`_ for fixes and enhancements of each version.
 
 
 License
@@ -276,4 +291,4 @@ License
 
 Copyright Frédéric Dogimont, 2017.
 
-Distributed under the terms of the `MIT <https://github.com/AffilaeTech/niav/LICENSE.rst>`_ license, Niav is free and open source software.
+Distributed under the terms of the `MIT <https://github.com/AffilaeTech/niav/blob/master/LICENSE.rst>`_ license, Niav is free and open source software.

@@ -2,6 +2,7 @@ Installation
 ------------
 
 .. code-block:: bash
+
     # Install python dependencies:
     sudo apt-get install python-setuptools build-essential python3-dev libffi-dev libssl-dev
 
@@ -31,6 +32,7 @@ Installation
 Clone Niav:
 
 .. code-block:: bash
+
     git clone https://github.com/AffilaeTech/niav.git /home/${USER}/code/niav
 
 
@@ -38,6 +40,7 @@ Run a test
 ----------
 
 .. code-block:: bash
+
     cd /home/${USER}/code/niav/
     NIAV_ENV=tests/functional_tests/env.ini /home/${USER}/venv/niav/bin/pytest ~/your_project/tests/functional_tests/test_simple.py
 
@@ -45,4 +48,5 @@ Run a test
 To execute from anywhere, use PYTHONPATH:
 
 .. code-block:: bash
+
     export PYTHONPATH=$PYTHONPATH:/home/${USER}/code/niav/; NIAV_ENV=/home/${USER}/code/niav/tests/functional_tests/env.ini /home/${USER}/envs/niav/bin/pytest /home/${USER}/code//your_project/tests/functional_tests/test_simple.py

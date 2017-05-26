@@ -12,7 +12,9 @@ Class
 SSH utilities
 
 - Execute commands on remote host.
+
 - Copy files from and to remote host.
+
 
     |  **Ssh**(host, port=None, user=None, password=None, private_key=None)
     |       host: string. Hostname or ip.

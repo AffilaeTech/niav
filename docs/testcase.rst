@@ -12,15 +12,25 @@ Class
 Add useful asserts to API testing
 
 - assertIsDictionary
+
 - assertDictionaryHasKey
+
 - assertDictionaryHasNotKey
+
 - assertDictionaryHasKeyIgnoringCase
+
 - assertIsString
+
 - assertIsInteger
+
 - assertIsTuple
+
 - assertIsList
+
 - assertListLength
+
 - assertListHasValue
+
 
     |  **TestCase**(*args, **kwargs)
     |      Create an instance of the class that will use the named test
@@ -72,6 +82,7 @@ Add useful asserts to API testing
     |       list: list. List to consider.
     |       length: int. Expected length.
     |
+
 
 Methods inherited from unittest.case.TestCase:
 
