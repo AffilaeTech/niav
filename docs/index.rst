@@ -36,7 +36,7 @@ Niav core
 Niav helpers
 ------------
 
-- `Mongo <https://github.com/AffilaeTech/niav/blob/master/docs/mongo.rst>`_
+- `Mongo <https://github.com/AffilaeTech/niav/blob/master/docs/helpers/mongo.rst>`_
 
 
 License
