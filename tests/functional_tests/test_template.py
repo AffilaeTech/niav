@@ -31,6 +31,6 @@ class TestTemplate(TestCase):
             "name": res["name"]
         }
         url = "%s/user/register" % self.url
-        status_code, headers, content, json = self.http.post(url, data=payload)
-        self.assertEqual(status_code, 200)
+        r = self.http.post(url, data=payload)
+        self.assertEqual(r.status_code, 200)
 

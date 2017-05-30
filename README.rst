@@ -2,6 +2,8 @@
 Niav
 ====
 
+**N**iav **i**s **a**nother **v**alidator
+
 ------
 
 .. image:: https://img.shields.io/badge/python-3.4%2B-blue.svg
