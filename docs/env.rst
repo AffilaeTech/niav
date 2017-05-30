@@ -20,6 +20,8 @@ NIAV Environment
 
         raises:     IOError if none of the paths are valid
 
+.. code-block::
+
   get(mixed_key)
       Get key value from NIAV_ENV config file
 
@@ -28,6 +30,8 @@ NIAV Environment
         return:     string. Value of "key" in "section" from ini file.
 
         raises:     Exception if "Section" or "Key" does not exist.
+
+.. code-block::
 
   get_int(mixed_key)
       Get key value from NIAV_ENV env.ini file
@@ -38,6 +42,8 @@ NIAV Environment
 
         raises:     Exception if "Section" or "Key" does not exist.
 
+.. code-block::
+
   get_int_unsafe(mixed_key)
       Get key value from NIAV_ENV env.ini file.
       This method doesn't raise exception.
@@ -45,6 +51,8 @@ NIAV Environment
         mixed_key:  string. Section and key to read as "section.key".
 
         return:     int. Value of "key" in "section" from ini file. None if key or value doesn't exist.
+
+.. code-block::
 
   get_unsafe(mixed_key)
       Get key value from NIAV_ENV env.ini file.

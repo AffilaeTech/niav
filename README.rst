@@ -2,7 +2,7 @@
 Niav
 ====
 
-**N**iav **i**s **a**nother **v**alidator
+Niav Is Another Validator
 
 ------
 
