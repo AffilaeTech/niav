@@ -1,5 +1,5 @@
 ====
-http
+Http
 ====
 
 File
@@ -21,46 +21,51 @@ Add some helpers:
 
 - cookies to dict
 
+.. code-block::
 
-    |  **get**(url, query_params=None, headers=None):
-    |    Make an HTTP request using 'GET' method
-    |
-    |     url: string. URL to reach.
-    |     query_params: dict. Query params. (default: None)
-    |     headers: dict. Custom headers to use. (default: None)
-    |
-    |     return: HttpResponse.  status code (int), list of headers (dict), content (string),
-    |               json (dict), cookies (dict), response (Requests Response)
-    |
-    |  **post**(url, query_params=None, headers=None, files=None, data=None, json=None):
-    |    Make an HTTP request using 'POST' method
-    |
-    |     url: string. URL to reach.
-    |     query_params: dict. Query params. (default: None)
-    |     headers: dict. Custom headers to use. (default: None)
-    |     files: dict. Files to upload. (default: None)
-    |     data: dict. Payload. (default: None)
-    |     json: dict. Payload. (automatically serialized by requests) (default: None)
-    |
-    |     return: HttpResponse.  status code (int), list of headers (dict), content (string),
-    |               json (dict), cookies (dict), response (Requests Response)
-    |
-    |  **put**(url, query_params=None, headers=None, files=None, data=None, json=None):
-    |    Make an HTTP request using 'PUT' method
-    |
-    |     url: string. URL to reach.
-    |     query_params: dict. Query params. (default: None)
-    |     headers: dict. Custom headers to use. (default: None)
-    |     files: dict. Files to upload. (default: None)
-    |     data: dict. Payload. (default: None)
-    |     json: dict. Payload. (automatically serialized by requests) (default: None)
-    |
-    |     return: HttpResponse.  status code (int), list of headers (dict), content (string),
-    |               json (dict), cookies (dict), response (Requests Response)
+  get(url, query_params=None, headers=None):
+      Make an HTTP request using 'GET' method
+
+        url:            string. URL to reach.
+        query_params:   dict. Query params. (default: None)
+        headers:        dict. Custom headers to use. (default: None)
+
+        return:         HttpResponse.  status code (int), list of headers (dict), content (string),
+               json (dict), cookies (dict), response (Requests Response)
+
+.. code-block::
+
+  post(url, query_params=None, headers=None, files=None, data=None, json=None):
+      Make an HTTP request using 'POST' method
+
+        url:            string. URL to reach.
+        query_params:   dict. Query params. (default: None)
+        headers:        dict. Custom headers to use. (default: None)
+        files:          dict. Files to upload. (default: None)
+        data:           dict. Payload. (default: None)
+        json:           dict. Payload. (automatically serialized by requests) (default: None)
+
+        return:         HttpResponse.  status code (int), list of headers (dict), content (string),
+               json (dict), cookies (dict), response (Requests Response)
+
+.. code-block::
+
+  put(url, query_params=None, headers=None, files=None, data=None, json=None):
+      Make an HTTP request using 'PUT' method
+
+        url:            string. URL to reach.
+        query_params:   dict. Query params. (default: None)
+        headers:        dict. Custom headers to use. (default: None)
+        files:          dict. Files to upload. (default: None)
+        data:           dict. Payload. (default: None)
+        json:           dict. Payload. (automatically serialized by requests) (default: None)
+
+        return:         HttpResponse.  status code (int), list of headers (dict), content (string),
+               json (dict), cookies (dict), response (Requests Response)
 
 
 ============
-httpResponse
+HttpResponse
 ============
 
 File
@@ -72,37 +77,44 @@ Class
 
 Requests Response wrapper.
 
-    |  **status_code**():
-    |   Get the http status code.
-    |
-    |   return: int.
-    |
-    |  **headers**():
-    |   Get headers.
-    |
-    |   return: dict.
-    |
-    |  **content**():
-    |   Get text content.
-    |
-    |   return: string.
-    |
-    |  **json**():
-    |   Get json content (if content can be unserialized).
-    |
-    |   return: dict.
-    |
-    |  **cookies**():
-    |   Get cookies.
-    |
-    |   return: dict.
-    |
-    |  **response**():
-    |   Get Requests object Response.
-    |
-    |   return: Response.
+.. code-block::
 
+  status_code():
+      Get the http status code.
 
+        return: int.
 
+.. code-block::
 
+  headers():
+      Get headers.
 
+        return: dict.
+
+.. code-block::
+
+  content():
+      Get text content.
+
+        return: string.
+
+.. code-block::
+
+  json():
+      Get json content (if content can be unserialized).
+
+        return: dict.
+
+.. code-block::
+
+  cookies():
+      Get cookies.
+
+        return: dict.
+
+.. code-block::
+
+  response():
+      Get Requests object Response.
+
+        return: Response.
