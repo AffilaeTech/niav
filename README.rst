@@ -43,23 +43,23 @@ An example of an API test (`nose <http://docs.pytest.org/en/latest/nose.html>`_ 
     # content of ~/tests/test_example.py
 
     from niav.testcase import TestCase
-    from niav.env import Env
-    from niav.http import Http
+    from niav.niav import Niav
     from niav.helpers.mongo.mongo import Mongo
 
     class TestExample(TestCase):
 
         # called before test(s)
         def setUp(self):
-            self.env = Env(__file__)
-            self.url = "%s://%s:%s" % (self.env.get("api.protocol"), self.env.get("api.host"), self.env.get("api.port"))
-            self.http = Http()
+            self.niav = Niav(__file__)
+            self.url = "%s://%s:%s" % (self.niav.env.get("api.protocol"),
+                                       self.niav.env.get("api.host"),
+                                       self.niav.env.get("api.port"))
 
         def test_example(self):
 
             # get books
             url = "%s/api/v1.0/books" % self.url
-            r = self.http.get(url)
+            r = self.niav.http.get(url)
             self.assertEqual(r.status_code, 200)
             self.assertDictionaryHasKey(r.json, "books")
             self.assertIsList(r.json["books"])
@@ -84,7 +84,7 @@ An example of an API test (`nose <http://docs.pytest.org/en/latest/nose.html>`_ 
                 "isbn": "654-5-2846-1826-5"
             }
             url = "%s/api/v1.0/book" % self.url
-            r = self.http.post(url, data=payload)
+            r = self.niav.http.post(url, data=payload)
             self.assertEqual(r.status_code, 200)
             self.assertDictionaryHasKey(r.json, "book")
             self.assertEqual(r.json["book"]["title"], "A little mouse")
@@ -142,7 +142,7 @@ For the above example to work, you must create a configuration file: env.ini
     host = 127.0.0.1
     port = 27017
 
-If you pass ``__file__`` in the constructor of Env() like in the example, Niav will automatically search for a *env.ini* at the same level as the test file.
+If you pass ``__file__`` in the constructor of Niav() like in the example, Niav will automatically search for a *env.ini* at the same level as the test file.
 
 In the same way, it will look if a file *local.ini* exist.
 *local.ini* is for secret things, like passwords, but also for things that can change between you and your colleagues.

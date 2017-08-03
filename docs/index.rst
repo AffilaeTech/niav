@@ -18,6 +18,8 @@ See `README <https://github.com/AffilaeTech/niav/blob/master/README.rst>`_.
 Niav core
 ---------
 
+- `Niav <https://github.com/AffilaeTech/niav/blob/master/docs/niav.rst>`_
+
 - `Env <https://github.com/AffilaeTech/niav/blob/master/docs/env.rst>`_
 
 - `File <https://github.com/AffilaeTech/niav/blob/master/docs/file.rst>`_

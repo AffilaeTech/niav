@@ -19,6 +19,7 @@ class Http(object):
         self.handler = requests
         logging.getLogger("requests.packages.urllib3.connectionpool").setLevel(logging.WARNING)
         self.log = logging.getLogger("niav")
+        self.env = None
 
     def __request(self, method, url, query_params=None, headers=None, files=None, data=None, json_opt=None, **kwargs):
         default_headers = {
@@ -39,6 +40,23 @@ class Http(object):
         method = method.upper()
         if method not in ["GET", "POST", "PUT"]:
             raise NameError("'%s' is not a supported HTTP method" % method)
+
+        if self.env is not None:
+            if self.env.get_unsafe("niav_http.disable_ssl_warning"):
+                if self.env.get_unsafe("niav_http.disable_ssl_warning").lower() == "true":
+                    import urllib3
+                    urllib3.disable_warnings()
+
+            if "verify" not in kwargs and self.env.get_unsafe("niav_http.verify"):
+                value = self.env.get_unsafe("niav_http.verify")
+                if value.lower() == "true":
+                    value = True
+                elif value.lower() == "false":
+                    value = False
+                self.set_kwargs(kwargs, "verify", value)
+
+            if "cert" not in kwargs and self.env.get_unsafe("niav_http.cert_crt") and self.env.get_unsafe("niav_http.cert_key"):
+                self.set_kwargs(kwargs, "cert", (self.env.get_unsafe("niav_http.cert_crt"), self.env.get_unsafe("niav_http.cert_key")))
 
         if method == "POST":
             response = self.handler.post(url,
@@ -140,6 +158,15 @@ class Http(object):
             :rtype: HttpResponse
         """
         return self.__request("put", url, query_params, headers, files, data, json_opt=json, **kwargs)
+
+    def set_env(self, env):
+        self.env = env
+
+    @classmethod
+    def set_kwargs(cls, kwargs, name, value):
+        if not isinstance(kwargs, dict):
+            kwargs = {}
+        kwargs[name] = value
 
 
 class HttpResponse(object):

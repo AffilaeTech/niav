@@ -63,6 +63,31 @@ Add some helpers:
         return:         HttpResponse.  status code (int), list of headers (dict), content (string),
                json (dict), cookies (dict), response (Requests Response)
 
+.. code-block::
+
+  set_env(env):
+      Set an Env instance.
+
+If the env is set, http will automatically read the following conf in env.ini (and local.ini):
+
+niav_http.disable_ssl_warning
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+(True/False)
+Disable ssl warning.
+
+niav_http.verify
+~~~~~~~~~~~~~~~~
+(True/False)
+Niav ignore verifying the SSL certificate if you set verify to False.
+
+niav_http.cert_crt and niav_http.cert_key
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+See: `Client side certificates <http://docs.python-requests.org/en/master/user/advanced/#client-side-certificates>`_.
+
+Niav support only the couple crt/key.
+
 
 ============
 HttpResponse
