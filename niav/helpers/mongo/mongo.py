@@ -150,9 +150,10 @@ class Mongo(object):
         if generation_time is None:
             generation_time = pendulum.now(timezone).start_of("day")
             # print(generation_time.strftime("%Y-%m-%d %H:%M:%S"))
-            object_id = ObjectId.from_datetime(generation_time)
-            # print(cls.str_id(object_id))
-            return object_id
+
+        object_id = ObjectId.from_datetime(generation_time)
+        # print(cls.str_id(object_id))
+        return object_id
 
     @classmethod
     def insert_one(cls, db, collection, doc):
