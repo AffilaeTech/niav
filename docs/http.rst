@@ -88,6 +88,16 @@ See: `Client side certificates <http://docs.python-requests.org/en/master/user/a
 
 Niav support only the couple crt/key.
 
+ex:
+
+.. code-block::
+
+  [niav_http]
+  disable_ssl_warning = True
+  verify = True
+  cert_crt = /etc/ssl/certs/client.crt
+  cert_key = /etc/ssl/private/client.key
+
 
 ============
 HttpResponse
