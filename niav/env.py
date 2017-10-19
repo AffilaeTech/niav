@@ -80,8 +80,10 @@ class Env(object):
         """
         section, key = mixed_key.split(".")
         if section not in self.config.sections():
+            self.log.info("section '%s' not found" % section)
             return None
         elif key not in self.config.options(section):
+            self.log.info("key '%s' not found in section '%s'" % (key, section))
             return None
         return self.config.get(section, key)
 
@@ -114,7 +116,9 @@ class Env(object):
         """
         section, key = mixed_key.split(".")
         if section not in self.config.sections():
+            self.log.info("section '%s' not found" % section)
             return None
         elif key not in self.config.options(section):
+            self.log.info("key '%s' not found in section '%s'" % (key, section))
             return None
         return self.config.getint(section, key)
