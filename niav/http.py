@@ -38,7 +38,7 @@ class Http(object):
             files = dict((key, open(filename, "rb")) for key, filename in files.items())
 
         method = method.upper()
-        if method not in ["GET", "POST", "PUT"]:
+        if method not in ["GET", "POST", "PUT", "DELETE"]:
             raise NameError("'%s' is not a supported HTTP method" % method)
 
         if self.env is not None:
@@ -55,8 +55,10 @@ class Http(object):
                     value = False
                 self.set_kwargs(kwargs, "verify", value)
 
-            if "cert" not in kwargs and self.env.get_unsafe("niav_http.cert_crt") and self.env.get_unsafe("niav_http.cert_key"):
+        if "cert" not in kwargs and self.env.get_unsafe("niav_http.cert_crt") and self.env.get_unsafe("niav_http.cert_key"):
                 self.set_kwargs(kwargs, "cert", (self.env.get_unsafe("niav_http.cert_crt"), self.env.get_unsafe("niav_http.cert_key")))
+
+        self.log.debug(kwargs)
 
         if method == "POST":
             response = self.handler.post(url,
@@ -68,7 +70,7 @@ class Http(object):
                                          **kwargs)
         elif method == "GET":
             response = self.handler.get(url, params=query_params, headers=default_headers, **kwargs)
-        else:
+        elif method == "PUT":
             response = self.handler.put(url,
                                         params=query_params,
                                         headers=default_headers,
@@ -76,6 +78,8 @@ class Http(object):
                                         data=data,
                                         json=json_opt,
                                         **kwargs)
+        elif method == "DELETE":
+            response = self.handler.delete(url, params=query_params, headers=default_headers, **kwargs)
 
         json = {}
         try:
@@ -159,6 +163,22 @@ class Http(object):
         """
         return self.__request("put", url, query_params, headers, files, data, json_opt=json, **kwargs)
 
+    def delete(self, url, query_params=None, headers=None, **kwargs):
+        """
+            Make an HTTP request using 'DELETE' method
+
+            :param url: URL to reach
+            :param query_params: Query params (default: None)
+            :param headers: Custom headers to use (default: None)
+            :type url: string
+            :type query_params: dict
+            :type headers: dict
+            :return: status code (int), list of headers (dict), content (string), json (dict),
+                     cookies (dict), response (requests Response)
+            :rtype: HttpResponse
+        """
+        return self.__request("delete", url, query_params, headers, **kwargs)
+
     def set_env(self, env):
         self.env = env
 
@@ -228,4 +248,3 @@ class HttpResponse(object):
     @response.setter
     def response(self, value):
         self._response = value
-
