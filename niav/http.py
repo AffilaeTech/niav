@@ -55,7 +55,7 @@ class Http(object):
                     value = False
                 self.set_kwargs(kwargs, "verify", value)
 
-        if "cert" not in kwargs and self.env.get_unsafe("niav_http.cert_crt") and self.env.get_unsafe("niav_http.cert_key"):
+            if "cert" not in kwargs and self.env.get_unsafe("niav_http.cert_crt") and self.env.get_unsafe("niav_http.cert_key"):
                 self.set_kwargs(kwargs, "cert", (self.env.get_unsafe("niav_http.cert_crt"), self.env.get_unsafe("niav_http.cert_key")))
 
         self.log.debug(kwargs)
