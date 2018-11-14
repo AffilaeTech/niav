@@ -2,8 +2,9 @@ import random
 import string
 import time
 import json
+import logging
 
-from pprint import pprint
+from pprint import pprint, pformat
 
 
 class Utils(object):
@@ -13,16 +14,30 @@ class Utils(object):
         Group here useful methods from various modules to avoid many import in tests.
     """
 
+    def __init__(self):
+        self.log = logging.getLogger("niav")
+
     @classmethod
     def pprint(cls, obj, **kwargs):
         """
-            Pretty print a dict
-            
+            Pretty print a dict (printed only if an error is throw)
+
             :param obj: dict to print
             :type obj: dict
         """
         print("")
         pprint(obj, **kwargs)
+
+    def plog(self, obj, **kwargs):
+        """
+            Print an object
+
+        :param obj: obj to log
+        :param kwargs:
+        :return:
+        """
+        res = pformat(obj, **kwargs)
+        self.log.info("\n" + res)
 
     @classmethod
     def get_random_string(cls, length=10):

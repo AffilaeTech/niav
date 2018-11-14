@@ -177,6 +177,9 @@ You can configure pytest with the file `pytest.ini <https://docs.pytest.org/en/l
     log_format = %(asctime)s %(levelname)-7.7s %(filename)-30.30s: %(message)s
     log_date_format = %Y-%m-%d %H:%M:%S
 
+    log_cli = True
+    log_cli_level = INFO
+
 
 Running tests
 -------------

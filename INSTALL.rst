@@ -19,7 +19,7 @@ Installation
     source /home/${USER}/venv/niav/bin/activate
 
     # Install mandatory packages:
-    pip install requests paramiko sshtunnel pytest pytest-catchlog pendulum
+    pip install requests paramiko sshtunnel pytest pendulum
 
     # Install optional packages (depending of your project)
     # MongoDB driver

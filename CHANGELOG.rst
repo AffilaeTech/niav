@@ -2,6 +2,17 @@
 Changelog
 =========
 
+
+2018/11/14
+~~~~~~~~~~
+
+- remove no more need dependency (pytest-catchlog now included in Pytest)
+- add an utility method (utils.plog) to write a message no captured
+  new conf in pytest.ini must be added:
+  log_cli = True
+  log_cli_level = INFO
+
+
 2017/08/03
 ~~~~~~~~~~
 
