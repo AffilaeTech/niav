@@ -20,6 +20,7 @@ class Env(object):
         self.log = logging.getLogger("niav")
         self.config = ConfigParser()
         config_files = []
+        self.verbose = False
 
         if caller is not None:
             try:
@@ -51,6 +52,8 @@ class Env(object):
         log_level = self.get_unsafe("log.level") if self.get_unsafe("log.level") is not None else logging.INFO
         self.log.setLevel(log_level)
 
+        self.verbose = self.get_unsafe("log.verbose") if self.get_unsafe("log.verbose") is not None else False
+
     def get(self, mixed_key):
         """
             Get key value from NIAV_ENV config file
@@ -80,10 +83,12 @@ class Env(object):
         """
         section, key = mixed_key.split(".")
         if section not in self.config.sections():
-            self.log.info("section '%s' not found" % section)
+            if self.verbose is True:
+                self.log.info("section '%s' not found" % section)
             return None
         elif key not in self.config.options(section):
-            self.log.info("key '%s' not found in section '%s'" % (key, section))
+            if self.verbose is True:
+                self.log.info("key '%s' not found in section '%s'" % (key, section))
             return None
         return self.config.get(section, key)
 
@@ -116,9 +121,11 @@ class Env(object):
         """
         section, key = mixed_key.split(".")
         if section not in self.config.sections():
-            self.log.info("section '%s' not found" % section)
+            if self.verbose is True:
+                self.log.info("section '%s' not found" % section)
             return None
         elif key not in self.config.options(section):
-            self.log.info("key '%s' not found in section '%s'" % (key, section))
+            if self.verbose is True:
+                self.log.info("key '%s' not found in section '%s'" % (key, section))
             return None
         return self.config.getint(section, key)
