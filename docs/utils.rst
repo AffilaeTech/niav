@@ -63,7 +63,7 @@ Group here useful methods from various modules to avoid many import in tests.
 
         return: float. Timestamp in milliseconds.
 
-.. code-blocks::
+.. code-block::
 
   execute_command(cls, command, shell=False, text=True, check=True, executable=None, capture_output=False, **kwargs)
        Execute a command
