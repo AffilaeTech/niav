@@ -3,10 +3,19 @@ Changelog
 =========
 
 
+2019/01/14
+~~~~~~~~~~
+
+- add execute_command in utils helper. This command is a wrapper of subprocess.run()
+
+- Python 3.5 is now the minimal requirement
+
+
 2018/11/14
 ~~~~~~~~~~
 
 - remove no more need dependency (pytest-catchlog now included in Pytest)
+
 - add an utility method (utils.plog) to write a message no captured
   new conf in pytest.ini must be added:
   log_cli = True

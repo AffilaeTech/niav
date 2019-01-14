@@ -6,7 +6,7 @@ Niav Is Another Validator
 
 ------
 
-.. image:: https://img.shields.io/badge/python-3.4%2B-blue.svg
+.. image:: https://img.shields.io/badge/python-3.5%2B-blue.svg
 
 ``Niav`` is a lightweight framework that allows you to quickly write functional tests for your API.
 

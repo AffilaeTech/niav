@@ -63,3 +63,20 @@ Group here useful methods from various modules to avoid many import in tests.
 
         return: float. Timestamp in milliseconds.
 
+.. code-blocks::
+
+  execute_command(cls, command, shell=False, text=True, check=True, executable=None, capture_output=False, **kwargs)
+       Execute a command
+
+         command:        string if shell=True or list if shell=False. The command to execute.
+                           "ls -al" (shell=True). Executed through the shell (default: /bin/sh)
+                           ["ls", "-al"] (shell=False). Executed by the OS
+         shell:          bool (default: false). if shell is true, you pass a single string to the shell, else you pass a
+                           list of arguments to the OS.
+         text:           bool (default: true). if text is true, a string will be returned. A byte sequence else.
+         check:          bool (default: true). If check is true, and the process exits with a non-zero exit code,
+                           a CalledProcessError exception will be raised.
+         executable:     string (default: None). executable to use to run the command. ie: "/bin/bash" (default: /bin/sh)
+         capture_output: bool (default: False). If capture_output is true, stdout and stderr will be captured.
+
+         return:         dict. args (list), return_code (int), stdout (string), stderr (string)

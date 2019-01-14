@@ -3,6 +3,8 @@ import string
 import time
 import json
 import logging
+import subprocess
+
 
 from pprint import pprint, pformat
 
@@ -99,3 +101,47 @@ class Utils(object):
             Json format to Python object
         """
         return json.loads(obj_json)
+
+    @classmethod
+    def execute_command(cls, command, shell=False, text=True, check=True, executable=None, capture_output=False, **kwargs):
+        """
+            Execute a command
+
+            :param command: command.
+            :type command: string if shell=True or list if shell=False
+            :param shell: if shell is true, you pass a single string to the shell, else you pass a list of arguments
+                            to the OS.
+            :type shell: bool
+            :param text: if text is true, a string will be returned. A byte sequence else.
+            :type text: bool
+            :param check: If check is true, and the process exits with a non-zero exit code, a CalledProcessError
+                            exception will be raised.
+            :type check: bool
+            :param executable: executable to use to run the command. ie: '/bin/bash' (default: /bin/sh)
+            :type executable: string
+            :param capture_output: If capture_output is true, stdout and stderr will be captured
+            :type capture_output: bool
+            :return: exist status code
+            :rtype: int
+        """
+        if executable is not None and "executable" not in kwargs:
+            cls.set_kwargs(kwargs, "executable", executable)
+
+        if capture_output is True and "capture_output" not in kwargs:
+            cls.set_kwargs(kwargs, "stdout", subprocess.PIPE)
+            cls.set_kwargs(kwargs, "stderr", subprocess.PIPE)
+
+        response = subprocess.run(command, shell=shell, universal_newlines=text, check=check, **kwargs)
+        final_response = {
+            "args": response.args,
+            "return_code": response.returncode,
+            "stdout": response.stdout,
+            "stderr": response.stderr}
+
+        return final_response
+
+    @classmethod
+    def set_kwargs(cls, kwargs, name, value):
+        if not isinstance(kwargs, dict):
+            kwargs = {}
+        kwargs[name] = value
