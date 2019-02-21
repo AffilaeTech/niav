@@ -1,5 +1,6 @@
 import requests
 import logging
+import re
 
 from niav.utils import Utils
 
@@ -35,7 +36,13 @@ class Http(object):
             default_headers.update(headers)
 
         if files is not None:
-            files = dict((key, open(filename, "rb")) for key, filename in files.items())
+            tmp_files = {}
+            for key, filename in files.items():
+                if isinstance(filename, tuple):
+                    tmp_files[key] = filename
+                else:
+                    tmp_files[key] = open(filename, "rb")
+            files = tmp_files
 
         method = method.upper()
         if method not in ["GET", "POST", "PUT", "DELETE"]:
@@ -96,10 +103,14 @@ class Http(object):
         r = HttpResponse()
         r.status_code = response.status_code
         r.headers = dict(response.headers)
-        r.content = response.text
+        r.content = response.content
+        r.text = response.text
         r.json = json
         r.cookies = cookies
         r.response = response
+
+        if r.headers.get('content-disposition') is not None:
+            r.filename = self.get_filename_from_content_disposition(r.headers.get('content-disposition'))
 
         return r
 
@@ -188,6 +199,18 @@ class Http(object):
             kwargs = {}
         kwargs[name] = value
 
+    @classmethod
+    def get_filename_from_content_disposition(cls, content_disposition):
+        """
+            Get filename from content-disposition header
+        """
+        if not content_disposition:
+            return None
+        filename = re.findall('filename=(.+)', content_disposition)
+        if len(filename) == 0:
+            return None
+        return filename[0]
+
 
 class HttpResponse(object):
     """
@@ -197,9 +220,11 @@ class HttpResponse(object):
         self._status_code = None
         self._headers = None
         self._content = None
+        self._text = None
         self._json = None
         self._cookies = None
         self._response = None
+        self._filename = None
 
     @property
     def status_code(self):
@@ -226,6 +251,14 @@ class HttpResponse(object):
         self._content = value
 
     @property
+    def text(self):
+        return self._text
+
+    @text.setter
+    def text(self, value):
+        self._text = value
+
+    @property
     def json(self):
         return self._json
 
@@ -248,3 +281,11 @@ class HttpResponse(object):
     @response.setter
     def response(self, value):
         self._response = value
+
+    @property
+    def filename(self):
+        return self._filename
+
+    @filename.setter
+    def filename(self, value):
+        self._filename = value
