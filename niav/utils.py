@@ -39,10 +39,10 @@ class Utils(object):
         :return:
         """
         res = pformat(obj, **kwargs)
-        if isinstance(obj, str):
-            self.log.info(res)
-        else:
+        if res.count("\n") > 1:
             self.log.info("\n" + res)
+        else:
+            self.log.info(res)
 
     @classmethod
     def get_random_string(cls, length=10):
