@@ -61,3 +61,9 @@ NIAV Environment
         mixed_key:  string. Section and key to read as "section.key".
 
         return:     string. Value of "key" in "section" from ini file. None if key or value doesn't exist.
+
+.. code-block::
+
+  get_tests_path()
+
+        return: string. Full path of tests folder.

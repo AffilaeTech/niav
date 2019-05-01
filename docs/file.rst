@@ -40,4 +40,13 @@ File utilities
       Calculate sha1 of specified file
 
         path:   string. Full path to file.
+
         return: string. file sha1.
+
+.. code-block::
+  file_to_base64(path)
+      Encode file to base64
+
+        path:   string. Full path to file
+
+        return: string. File base64 string
