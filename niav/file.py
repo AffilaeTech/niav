@@ -1,6 +1,7 @@
 import tempfile
 import hashlib
 import os
+import base64
 
 
 class File(object):
@@ -62,3 +63,17 @@ class File(object):
         """
         if os.path.exists(path):
             os.unlink(path)
+
+    @classmethod
+    def file_to_base64(cls, path):
+        """
+            Encode file to base64
+
+            :param path: Full path to file
+            :type path: string
+            :return: File base64 string
+            :rtype: string
+        """
+        with open(path, "rb") as file_handler:
+            file_base64_bytes = base64.b64encode(file_handler.read())
+            return file_base64_bytes.decode("utf-8")

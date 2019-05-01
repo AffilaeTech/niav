@@ -4,6 +4,7 @@ import time
 import json
 import logging
 import subprocess
+import sys
 
 
 from pprint import pprint, pformat
@@ -90,6 +91,16 @@ class Utils(object):
             :type seconds: int
         """
         time.sleep(seconds)
+
+    @classmethod
+    def exit(cls, status=0):
+        """
+            Exit test
+
+            :param status: exit code
+            :type status: int
+        """
+        sys.exit(status)
 
     @classmethod
     def json_dump(cls, obj, ensure_ascii=False):
