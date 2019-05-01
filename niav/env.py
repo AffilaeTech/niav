@@ -21,14 +21,17 @@ class Env(object):
         self.config = ConfigParser()
         config_files = []
         self.verbose = False
+        self.tests_path = None
 
         if caller is not None:
             try:
-                auto_conf = os.path.join(os.path.split(caller)[0], "env.ini")
+                self.tests_path = os.path.split(caller)[0]
+
+                auto_conf = os.path.join(self.tests_path, "env.ini")
                 if os.path.exists(auto_conf):
                     config_files.append(auto_conf)
 
-                auto_conf = os.path.join(os.path.split(caller)[0], "local.ini")
+                auto_conf = os.path.join(self.tests_path, "local.ini")
                 if os.path.exists(auto_conf):
                     config_files.append(auto_conf)
             except:
@@ -129,3 +132,6 @@ class Env(object):
                 self.log.info("key '%s' not found in section '%s'" % (key, section))
             return None
         return self.config.getint(section, key)
+
+    def get_tests_path(self):
+        return self.tests_path
