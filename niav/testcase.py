@@ -2,7 +2,7 @@ import unittest
 import logging
 
 
-class TestCase(unittest.TestCase):
+class TestCase(unittest.IsolatedAsyncioTestCase):
     """
         Add useful asserts to API testing
         
