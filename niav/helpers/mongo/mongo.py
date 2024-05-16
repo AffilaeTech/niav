@@ -31,6 +31,8 @@ class Mongo(object):
         self.host = None
         self.port = None
         self.client = None
+        self.direct_connection = None
+        self.replica_set = None
 
         self.tunnel = None
         self.tunnel_host = None
@@ -62,7 +64,7 @@ class Mongo(object):
             self.tunnel.start()
 
         if self.client is None:
-            self.client = MongoClient(self.host, self.port)
+            self.client = MongoClient(self.host, self.port, directConnection=self.direct_connection, replicaSet=self.replica_set)
             self.log.info("Mongo connected to '%s'" % self.host)
         return self.client
 
@@ -93,6 +95,8 @@ class Mongo(object):
 
         self.host = self.env.get("%s.host" % self.section_mongo)
         self.port = self.env.get_int("%s.port" % self.section_mongo)
+        self.direct_connection = self.env.get_int_unsafe("%s.direct_connection" % self.section_mongo) if self.env.get_int_unsafe("%s.direct_connection" % self.section_mongo) is not None else True
+        self.replica_set = self.env.get_int_unsafe("%s.replica_set" % self.section_mongo)
 
     def configure_tunnel_ssh(self):
         """

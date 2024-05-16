@@ -4,16 +4,12 @@ Installation
 .. code-block:: bash
 
     # Install python dependencies:
-    sudo apt-get install python-setuptools build-essential python3-dev libffi-dev libssl-dev
-
-    # Install pip:
-    sudo easy_install pip
-
-    # Install virtualenv
-    sudo pip install virtualenv
+    sudo apt-get install python-setuptools build-essential python3-dev libffi-dev libssl-dev python3-venv
 
     # Create vitualenv
-    virtualenv -p python3 /home/${USER}/venv/niav
+    mkdir -p /home/${USER}/venv
+    cd venv
+    python3 -m venv niav
 
     # Activate virtualenv:
     source /home/${USER}/venv/niav/bin/activate

@@ -3,6 +3,16 @@ Changelog
 =========
 
 
+2024/05/16
+~~~~~~~~~~
+
+- update MongoDB helper for MongoDB > 4.0
+- add replicaSet support to MongoDB helper
+- add directConnection option to MongoDB helper
+
+- Python 3.5 is now the minimal requirement
+
+
 2024/04/25
 ~~~~~~~~~~
 
