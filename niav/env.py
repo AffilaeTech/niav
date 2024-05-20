@@ -133,5 +133,43 @@ class Env(object):
             return None
         return self.config.getint(section, key)
 
+    def get_boolean(self, mixed_key):
+        """
+            Get key value from NIAV_ENV env.ini file
+
+            :param mixed_key: Section and key to read as "section.key"
+            :type mixed_key: string
+            :return: Value of "key" in "section" from ini file
+            :rtype: boolean
+            :raises: Exception if "Section" or "Key" does not exist
+        """
+        section, key = mixed_key.split(".")
+        if section not in self.config.sections():
+            raise KeyError("section '%s' does not exists" % section)
+        elif key not in self.config.options(section):
+            raise KeyError("key '%s' does not exists" % key)
+        return self.config.getboolean(section, key)
+
+    def get_boolean_unsafe(self, mixed_key):
+        """
+            Get key value from NIAV_ENV env.ini file.
+            This method doesn't raise exception.
+
+            :param mixed_key: section and key to read as "section.key"
+            :type mixed_key: string
+            :return: value of "key" in "section" from ini file. None if key or value doesn't exist.
+            :rtype: boolean
+        """
+        section, key = mixed_key.split(".")
+        if section not in self.config.sections():
+            if self.verbose is True:
+                self.log.info("section '%s' not found" % section)
+            return None
+        elif key not in self.config.options(section):
+            if self.verbose is True:
+                self.log.info("key '%s' not found in section '%s'" % (key, section))
+            return None
+        return self.config.getboolean(section, key)
+
     def get_tests_path(self):
         return self.tests_path

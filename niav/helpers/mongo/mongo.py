@@ -95,8 +95,8 @@ class Mongo(object):
 
         self.host = self.env.get("%s.host" % self.section_mongo)
         self.port = self.env.get_int("%s.port" % self.section_mongo)
-        self.direct_connection = self.env.get_int_unsafe("%s.direct_connection" % self.section_mongo) if self.env.get_int_unsafe("%s.direct_connection" % self.section_mongo) is not None else True
-        self.replica_set = self.env.get_int_unsafe("%s.replica_set" % self.section_mongo)
+        self.direct_connection = self.env.get_boolean_unsafe("%s.direct_connection" % self.section_mongo) if self.env.get_boolean_unsafe("%s.direct_connection" % self.section_mongo) is not None else True
+        self.replica_set = self.env.get_unsafe("%s.replica_set" % self.section_mongo)
 
     def configure_tunnel_ssh(self):
         """
